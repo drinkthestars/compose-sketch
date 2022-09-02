@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,12 +54,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                         )
 
                         val offset = Offset(posX, posY)
-//                        val noise = Java.glm.simplex(
-//                            Vec4(
-//                                u, v, 10f * cos(TWO_PI * time / 12), 10f * sin(TWO_PI * time / 10)
-//                            )
-//                        ) * 30f
-//                        val noisyOffset = offset.copy(y = posY + noise, x = posX - noise)
                         drawCircle(
                             color = Color.White,
                             center = offset.copy(
@@ -91,30 +86,23 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     .align(Alignment.BottomCenter),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    Modifier
-                        .wrapContentSize()
-                        .background(Color(0x9CFFFFFF), RoundedCornerShape(30.dp))
-                        .padding(horizontal = 48.dp, vertical = 16.dp)
-                        .blur(12.dp, BlurredEdgeTreatment.Unbounded),
-                    contentAlignment = Alignment.Center
+                Button(
+                    onClick = { },
+                    colors = buttonColors(
+                        backgroundColor = Color.White,
+                        contentColor = Color.DarkGray
+                    )
                 ) {
-                    Box(
-                        Modifier.blur(140.dp, BlurredEdgeTreatment.Unbounded)
-                    ) {}
-//                    Text(
-//                        modifier = Modifier.clickable {
-//                        },
-//                        text = "LOGIN",
-//                        style = TextStyle(
-//                            fontWeight = FontWeight.SemiBold,
-//                            fontSize = 20.sp,
-//                            letterSpacing = 3.5.sp
-//                        )
-//                    )
+                    Text("LOGIN")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { /*TODO*/ }) {
+                Button(
+                    onClick = { },
+                    colors = buttonColors(
+                        backgroundColor = Color.White,
+                        contentColor = Color.DarkGray
+                    )
+                ) {
                     Text("SIGN UP")
                 }
                 Spacer(modifier = Modifier.height(150.dp))

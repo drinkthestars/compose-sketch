@@ -98,18 +98,6 @@ private fun Image(imageBitmap: ImageBitmap, modifier: Modifier = Modifier) {
     }
     val tileSize: Float = imageBitmap.width.toFloat() / TilesX
 
-    val rectSize = Size(imageBitmap.width.toFloat() + tileSize / 2, 300f)
-    val rectOffset = Offset(-tileSize / 2, linearRand(0f, 200f))
-//    val rect = Rect(offset = rectOffset, size = rectSize)
-
-    val rectSize2 = Size(imageBitmap.width.toFloat() + tileSize / 2, 200f)
-    val rectOffset2 = Offset(-tileSize / 2, linearRand(250f, 500f))
-//    val rect2 = Rect(offset = rectOffset2, size = rectSize2)
-
-    val rectSize3 = Size(imageBitmap.width.toFloat() + tileSize / 2, 300f)
-    val rectOffset3 = Offset(-tileSize / 2, linearRand(600f, imageBitmap.height.toFloat()))
-//    val rect3 = Rect(offset = rectOffset3, size = rectSize3)
-
     Sketch(modifier = modifier
         .size(canvasSize)
         .pointerInput(Unit) {
@@ -124,14 +112,6 @@ private fun Image(imageBitmap: ImageBitmap, modifier: Modifier = Modifier) {
             }
         }
     ) { time ->
-        val hue = map(
-            value = offset.value.y,
-            sourceMin = 0f,
-            sourceMax = imageBitmap.height.toFloat(),
-            destMin = 0f,
-            destMax = 360f
-        )
-
 //        drawRect(
 //            color = Color.hsv(hue, 0.3f, 1f),
 //            topLeft = rectOffset,
@@ -161,7 +141,13 @@ private fun Image(imageBitmap: ImageBitmap, modifier: Modifier = Modifier) {
 //                    x = x,
 //                    y = y
 //                )
-
+                val hue = map(
+                    value = offset.value.y,
+                    sourceMin = 0f,
+                    sourceMax = imageBitmap.height.toFloat(),
+                    destMin = 0f,
+                    destMax = 360f
+                )
                 val luminance = pixel.luminance()
                 drawCircleCustomHue(
                     hue = hue,
@@ -309,17 +295,10 @@ private fun DrawScope.drawCircleCustomHue(
     y: Int
 ) {
     drawCircle(
-        color = Color.hsv(hue, (luminance).coerceAtMost(1f), 1f),
-        radius = (luminance * 105 / 2) ,
+        color = Color.hsv(hue, (luminance + 0.2f).coerceAtMost(1f), 1f),
+        radius = (luminance * tileSize / 2) + 3f,
         center = Offset(x.toFloat(), y.toFloat()),
     )
-
-    // last batch bust
-//    drawCircle(
-//        color = Color.hsv(hue, (luminance + 0.2f).coerceAtMost(1f), 1f),
-//        radius = (luminance * tileSize / 2) + 3f,
-//        center = Offset(x.toFloat(), y.toFloat()),
-//    )
 }
 
 

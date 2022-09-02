@@ -65,20 +65,13 @@ fun Harmonic() {
                 path.reset()
                 for (i in 0 until 360) {
                     val rad = i * PI.toFloat() / 180f
-                    val r = map(sin(value).toFloat(), -1f, 1f, 20f, 200f)
+                    val r = map(sin(value), -1f, 1f, 20f, 200f)
                     val x = r * cos(rad)
                     val y = r * sin(rad)
                     when (i) {
                         0 -> path.moveTo(x, y)
                         else -> path.lineTo(x, y)
                     }
-                    drawCircle(
-                        color = Color.Green,
-                        radius = r / 10f,
-                        alpha = 0.1f,
-                        center = Offset(x, y)
-                    )
-                    // could be cool to see this as a ring of dots
                 }
                 path.close()
                 drawPath(path, color = Color.DarkGray, style = Stroke(2f), alpha = 0.5f)
