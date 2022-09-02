@@ -14,11 +14,12 @@ Resources for the `Creative Coding with Compose` talk at DroidCon NY 2022.
 - https://thebookofshaders.com/
 - http://pixelshaders.com/
 - https://inconvergent.net/generative/
-- https://www.artnome.com/news/2018/8/8/why-love-generative-art
-- https://en.wikipedia.org/wiki/Vera_Moln%C3%A1r
+- [Why love generative art](https://www.artnome.com/news/2018/8/8/why-love-generative-art)
+- [Vera Molnár](https://en.wikipedia.org/wiki/Vera_Moln%C3%A1r)
 
 ## Examples
-- Dots + Noise
-- Image Processing
-- Sketch utility
-- Utils 
+- [Dots + Noise](https://github.com/drinkthestars/compose-sketch/tree/main/app/src/main/kotlin/com/drinkstars/composesketch/dots)
+- [`Sketch` utility](https://github.com/drinkthestars/compose-sketch/blob/main/app/src/main/kotlin/com/drinkstars/composesketch/sketch/Sketch.kt)
+- [`lerp()`/`map()`/`norm()`](https://github.com/drinkthestars/compose-sketch/blob/main/app/src/main/kotlin/com/drinkstars/composesketch/Util.kt)
+- [Shaders](https://github.com/drinkthestars/compose-sketch/tree/main/app/src/main/kotlin/com/drinkstars/composesketch/shaders)
+- [Image Processing](https://github.com/drinkthestars/compose-sketch/tree/main/app/src/main/kotlin/com/drinkstars/composesketch/imageproc)
