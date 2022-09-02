@@ -10,9 +10,7 @@ private val ShaderScreens = listOf(
     Screen("StarNestShader") { StarNestShader() },
     Screen("FractalShader") { FractalShader() },
     Screen("BlobsShader") { BlobsShader() },
-    Screen("FibSphereShader") { FibSphereShader() },
     Screen("NebulaShader") { NebulaShader() },
-    Screen("GradientSliderShader") { GradientSliderShader() },
 )
 
 @Composable

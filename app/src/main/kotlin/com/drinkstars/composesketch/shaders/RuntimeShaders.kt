@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,26 +25,20 @@ import org.intellij.lang.annotations.Language
 @Language("AGSL")
 private const val BLOBS = """
     uniform float2 iResolution; // Viewport resolution (pixels)
-    uniform float iTime; // Shader playback time (s)
     uniform vec4 iMouse; // Mouse drag pos=.xy Click pos=.zw (pixels)
     
     vec4 main( vec2 fragCoord )
     {
-      float mx = max(iResolution.x, iResolution.y);
-      vec2 uv = fragCoord.xy / mx;
-      vec2 center = iResolution.xy / mx * 0.5;
+        float mx = max(iResolution.x, iResolution.y);
         
-      float cDist = distance(center, uv) * 5.0;
-      float mDist = distance(iMouse.xy / mx, uv) * 10.0;
-      float color = cDist * cDist * mDist;
+        vec2 uv = fragCoord.xy / mx;
+        vec2 center = iResolution.xy / mx * 0.5;
         
-      // Normalized pixel coordinates (from 0 to 1)
-      vec2 uvColor = fragCoord/iResolution.xy;
+        float cDist = distance(center, uv) * 5.0;
+        float mDist = distance(iMouse.xy / mx, uv) * 10.0;
+        float color = cDist * cDist * mDist;
         
-      // Time varying pixel color
-      vec3 col = 0.7 + 0.1*cos(iTime*2.0+uvColor.xxx*2.0+vec3(1.0,2.0,4.0));
-        
-      return vec4(color > 1.0, col);
+        return vec4(color > 1.0, 1, 1, 1);
     }
 """
 
@@ -375,97 +368,19 @@ private val NEBULA = """
         
         return forCol2 + vec4(backCol2, 1.0);
     }
-    
-    
-    /*void mainImage( out vec4 fragColor, in vec2 fragCoord )
-    {
-        vec2 uv = fragCoord.xy / iResolution.xy;
-        fragColor = vec4(uv,0.5+0.5*sin(iTime),1.0);
-    }*/
-""".trimIndent()
-
-@Language("AGSL")
-private val FIB_SPHERE =  """
-    // Source: @XorDev https://twitter.com/XorDev/status/1475524322785640455
-    
-   uniform float2 iResolution;
-   uniform float iTime;
-
-   vec4 main(vec2 FC) {
-      vec4 o = vec4(0);
-      vec2 p = vec2(0), c=p, u=FC.xy*2.-iResolution.xy;
-      float a;
-      for (float i=0; i<4e2; i++) {
-        a = i/2e2-1.;
-        p = cos(i*2.4+iTime+vec2(0,11))*sqrt(1.-a*a);
-        c = u/iResolution.y+vec2(p.x,a)/(p.y+2.);
-        o += (cos(i+vec4(0,2,4,0))+1.)/dot(c,c)*(1.-p.y)/3e4;
-      }
-      return o;
-    }
 """
-
-@Language("AGSL")
-private val GRADIENT_SLIDER =  """    
-   uniform float2 iResolution;
-   uniform float iTime;
-   uniform vec4 iMouse;
-
-    vec4 main( vec2 fragCoord )
-    {
-        // Normalized pixel coordinates (from 0 to 1)
-        vec2 uv = fragCoord/iResolution.xy;
-        float mouseY = iMouse.x/iResolution.x * 0.5;
-    
-    
-        // Time varying pixel color
-        vec3 col = 0.7 + 0.2*cos(iTime+uv.xxx+vec3(1,2,4)) + mouseY;
-    
-        // Output to screen
-        return vec4(col,1.0);
-    }
-""".trimIndent()
-
-val gradientSliderShader = RuntimeShader(GRADIENT_SLIDER)
-val gradientSliderBrush = ShaderBrush(gradientSliderShader)
-@Composable
-fun GradientSliderShader() {
-    Box(modifier = Modifier
-        .fillMaxSize(), contentAlignment = Alignment.Center) {
-        RuntimeShaderSketch(
-            shader = gradientSliderShader,
-            brush = gradientSliderBrush,
-            modifier = Modifier
-                .fillMaxSize(0.8f)
-        )
-    }
-}
-
-val fibSpShader = RuntimeShader(FIB_SPHERE)
-val fibSpBrush = ShaderBrush(fibSpShader)
-@Composable
-fun FibSphereShader() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.DarkGray), contentAlignment = Alignment.Center) {
-        RuntimeShaderSketch(
-            shader = fibSpShader,
-            brush = fibSpBrush,
-            modifier = Modifier
-                .fillMaxSize(0.7f)
-                .aspectRatio(1f)
-        )
-    }
-}
 
 val nebulaShader = RuntimeShader(NEBULA)
 val nebulaBrush = ShaderBrush(nebulaShader)
 @Composable
 fun NebulaShader() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.DarkGray), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray), contentAlignment = Alignment.Center
+    ) {
         RuntimeShaderSketch(
+            addTimeUniform = true,
             shader = nebulaShader,
             brush = nebulaBrush,
             modifier = Modifier
@@ -479,7 +394,10 @@ val blobsBrush = ShaderBrush(blobsShader)
 @Composable
 fun BlobsShader() {
     RuntimeShaderSketch(
+        addTimeUniform = false,
+        addMouseUniform = true,
         shader = blobsShader,
+        speed = 0f,
         brush = blobsBrush,
         modifier = Modifier.fillMaxSize()
     )
@@ -490,6 +408,8 @@ val starNestBrush = ShaderBrush(starNest)
 @Composable
 fun StarNestShader() {
     RuntimeShaderSketch(
+        addTimeUniform = true,
+        addMouseUniform = true,
         shader = starNest,
         brush = starNestBrush,
         modifier = Modifier.fillMaxSize()
@@ -500,13 +420,20 @@ val fractalShader = RuntimeShader(FRACTAL)
 val fractalBrush = ShaderBrush(fractalShader)
 @Composable
 fun FractalShader() {
-    RuntimeShaderSketch(
-        shader = fractalShader,
-        brush = fractalBrush,
+    Box(
         modifier = Modifier
-            .fillMaxSize(0.9f)
-            .background(Color.DarkGray)
-    )
+            .fillMaxSize()
+            .background(Color.DarkGray), contentAlignment = Alignment.Center
+    ) {
+        RuntimeShaderSketch(
+            addTimeUniform = true,
+            shader = fractalShader,
+            brush = fractalBrush,
+            modifier = Modifier
+                .fillMaxSize(0.9f)
+                .background(Color.DarkGray)
+        )
+    }
 }
 
 @Composable
@@ -514,7 +441,9 @@ private fun RuntimeShaderSketch(
     modifier: Modifier = Modifier,
     shader: RuntimeShader,
     brush: ShaderBrush,
-    speed: Float = 1f
+    speed: Float = 1f,
+    addTimeUniform: Boolean = true,
+    addMouseUniform: Boolean = false,
 ) {
     var offset by remember { mutableStateOf(Offset.Zero) }
     var size by remember { mutableStateOf(Size.Zero) }
@@ -526,10 +455,10 @@ private fun RuntimeShaderSketch(
                 size = Size(it.width.toFloat(), it.height.toFloat())
             }
             .pointerInput(Unit) {
-                detectTapGestures {
-                    offset = Offset(it.x, it.y)
-                }
                 detectDragGestures(
+                    onDragStart = {
+                        offset = it
+                    },
                     onDrag = { _, dragAmount ->
                         val summedX = offset.x + dragAmount.x
                         val summedY = offset.y + dragAmount.y
@@ -541,14 +470,20 @@ private fun RuntimeShaderSketch(
             },
         speed = speed,
         showControls = false,
-        onDraw = { value ->
+        onDraw = { time ->
             shader.setFloatUniform(
                 "iResolution",
                 size.width, size.height
             )
 
-            shader.setFloatUniform("iTime", value)
-            shader.setFloatUniform("iMouse", offset.x, offset.y, 0f, 0f)
+            if (addTimeUniform) {
+                shader.setFloatUniform("iTime", time)
+            }
+
+            if (addMouseUniform) {
+                shader.setFloatUniform("iMouse", offset.x, offset.y, 0f, 0f)
+            }
+
             drawRect(brush)
         }
     )
