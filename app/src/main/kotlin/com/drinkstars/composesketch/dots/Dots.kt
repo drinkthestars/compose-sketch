@@ -60,10 +60,8 @@ import glm_.glm.pow
 import glm_.vec2.Vec2
 import glm_.vec3.Vec3
 import glm_.vec4.Vec4
-import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
-import kotlin.random.Random
 
 private val Padding = 48.dp
 private const val DotCount = 10
@@ -76,6 +74,7 @@ val paint = Paint().apply {
     alpha = 1f
 }
 
+// region Meshes
 @Composable
 fun MonotoneNoisyUVMesh(modifier: Modifier = Modifier) {
     NoisyUVMesh(modifier) { dots: List<Offset>, dotCount: Int, path: Path ->
@@ -148,8 +147,9 @@ fun HueNoisyXYMesh(modifier: Modifier = Modifier) {
         )
     }
 }
+// endregion
 
-
+// region Points
 @Composable
 fun NoisyPoints(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -197,7 +197,9 @@ fun NoisyPoints(modifier: Modifier = Modifier) {
         )
     }
 }
+// endregion
 
+// region Dots
 @Composable
 fun Random2DDots(modifier: Modifier = Modifier) {
     DotGrid(modifier) { u, v, x, y, time, dotCount, random ->
@@ -379,7 +381,7 @@ fun Dot2DNoiseRadius(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun DotNoisyOffset(modifier: Modifier = Modifier) {
+fun Dot4DNoiseOffset(modifier: Modifier = Modifier) {
     DotGrid(modifier) { u, v, x, y, time, dotCount, _ ->
         val offset = Offset(x, y)
         val noise = glm.simplex(
@@ -611,7 +613,9 @@ fun DotsAroundCircleHalftones(modifier: Modifier = Modifier) {
         )
     }
 }
+// endregion
 
+// region Mesh Wrappers
 @Composable
 private fun NoisyXYMesh(
     modifier: Modifier = Modifier,
@@ -711,7 +715,9 @@ private fun NoisyUVMesh(
         )
     }
 }
+// endregion
 
+// region Grid Wrappers
 @Composable
 private fun DotGrid(
     modifier: Modifier = Modifier,
@@ -816,6 +822,7 @@ private fun GridContainer(
         }
     }
 }
+// endregion
 
 private fun DrawScope.drawMonotoneMeshPath(
     dots: List<Offset>,

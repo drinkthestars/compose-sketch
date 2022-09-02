@@ -9,7 +9,6 @@ import com.drinkstars.composesketch.drawing.Drawing
 import com.drinkstars.composesketch.imageproc.ImageProc
 import com.drinkstars.composesketch.osc.Oscillations
 import com.drinkstars.composesketch.particles.Particles
-import com.drinkstars.composesketch.polar.PolarCoordinates
 import com.drinkstars.composesketch.shaders.Shaders
 import com.drinkstars.composesketch.ui.UIExamples
 
@@ -20,7 +19,6 @@ object HomeScreens {
     const val Drawing = "Drawing"
     const val ImageProc = "Image Proc"
     const val Particles = "Particles"
-    const val PolarCoordinates = "Polar Coordinates"
     const val Shaders = "Shaders"
     const val UIExamples = "UIExamples"
 }
@@ -31,7 +29,6 @@ private val TopLevelScreens = listOf(
     Screen("Drawing") { Drawing() },
     Screen("ImageProc") { ImageProc() },
     Screen("Particles") { Particles() },
-    Screen("PolarCoordinates") { PolarCoordinates() },
     Screen("Shaders") { Shaders() },
     Screen("UIExamples") { UIExamples() }
 )

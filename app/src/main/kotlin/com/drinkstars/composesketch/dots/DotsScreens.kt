@@ -25,7 +25,7 @@ private val DotsScreens = listOf(
     Screen("DotSinRadiusVariation") { DotSinRadiusVariation() },
     Screen("DotAnimatedRadiusAndCenterVariation") { DotAnimatedRadiusAndCenterVariation() },
     Screen("Dot2DNoiseRadius") { Dot2DNoiseRadius() },
-    Screen("DotNoisyOffset") { DotNoisyOffset() },
+    Screen("Dot4DNoiseOffset") { Dot4DNoiseOffset() },
     Screen("Lines2DNoise") { Lines2DNoise() },
     Screen("Lines3DNoise") { Lines3DNoise() },
     Screen("Lines4DNoise") { Lines4DNoise() },
