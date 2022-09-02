@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">android-template</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">Compose Sketch</string>
+    <string name="title">Sketches</string>
 </resources>

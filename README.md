@@ -1,6 +1,5 @@
-# android-template
+# Compose Sketch
 
-![build](https://github.com/drinkthestars/android-template/actions/workflows/android.yml/badge.svg)
+![build](https://github.com/drinkthestars/compose-sketch/actions/workflows/android.yml/badge.svg)
 
-
-A template for Android projects using Kotlin DSL build files & Jetpack Compose.
+A creative coding/generative art playground for Jetpack Compose.

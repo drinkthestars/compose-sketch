@@ -1,2 +1,2 @@
-rootProject.name = "android-template"
+rootProject.name = "compose-sketch"
 include(":app")

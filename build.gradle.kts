@@ -15,6 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://raw.githubusercontent.com/kotlin-graphics/mary/master")
     }
 }
 
