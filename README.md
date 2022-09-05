@@ -2,6 +2,9 @@
 
 Resources for the `Creative Coding with Compose` talk at DroidCon NY 2022.
 
+## Slides
+[html](https://drinkthestars.github.io/CreativeCodingCompose2022), [pdf](https://github.com/drinkthestars/CreativeCodingCompose2022/blob/main/CreativeCodingCompose2022.pdf)
+
 ## Resources
 - Main resource https://github.com/terkelg/awesome-creative-coding
 - [The Coding Train!](https://www.youtube.com/user/shiffman)
