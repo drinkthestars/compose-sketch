@@ -201,6 +201,15 @@ fun NoisyPoints(modifier: Modifier = Modifier) {
 
 // region Dots
 @Composable
+fun BasicGrid(modifier: Modifier = Modifier) {
+    DotGrid(modifier) { u, v, x, y, time, dotCount, random ->
+        drawCircle(
+            color = DarkGray, radius = 17f, center = Offset(x, y)
+        )
+    }
+}
+
+@Composable
 fun Random2DDots(modifier: Modifier = Modifier) {
     DotGrid(modifier) { u, v, x, y, time, dotCount, random ->
         val rand = random ?: 1f

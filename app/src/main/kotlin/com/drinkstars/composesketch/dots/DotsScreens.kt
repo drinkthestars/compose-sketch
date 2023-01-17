@@ -6,6 +6,7 @@ import com.drinkstars.composesketch.Screen
 import com.drinkstars.composesketch.Sketches
 
 private val DotsScreens = listOf(
+    Screen("BasicGrid") { BasicGrid() },
     Screen("MonotoneNoisyUVMesh") { MonotoneNoisyUVMesh() },
     Screen("MonotoneNoisyXYMesh") { MonotoneNoisyXYMesh() },
     Screen("HueNoisyUVMesh") { HueNoisyUVMesh() },
