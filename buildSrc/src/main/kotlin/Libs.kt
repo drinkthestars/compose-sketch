@@ -8,19 +8,25 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.24.8-beta"
-        const val insets = "com.google.accompanist:accompanist-insets:$version"
+        private const val version = "0.29.0-alpha"
         const val systemUiController =
             "com.google.accompanist:accompanist-systemuicontroller:$version"
     }
 
     object Coil {
-        private const val version = "2.0.0"
+        private const val version = "2.2.2"
         const val compose = "io.coil-kt:coil-compose:$version"
     }
 
+    object Glide {
+        private const val glideVersion = "4.14.2"
+        private const val composeVersion = "1.0.0-alpha.1"
+        const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+        const val compose = "com.github.bumptech.glide:compose:$composeVersion"
+    }
+
     object Coroutines {
-        private const val version = "1.6.1"
+        private const val version = "1.6.4"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -31,18 +37,19 @@ object Libs {
         const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
 
         object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.5.1"
+            const val activityCompose = "androidx.activity:activity-compose:1.7.0-alpha03"
         }
 
         object Compose {
-            const val libVersion = "1.2.0"
-            const val compilerVersion = "1.3.0-rc02"
-            private const val toolingVersion = "1.1.1"
+            const val libVersion = "1.4.0-alpha02"
+            const val compilerVersion = "1.4.0-alpha02"
+            private const val toolingVersion = "1.3.2"
 
             const val animation = "androidx.compose.animation:animation:$libVersion"
             const val foundation = "androidx.compose.foundation:foundation:$libVersion"
             const val layout = "androidx.compose.foundation:foundation-layout:$libVersion"
-            const val iconsExtended = "androidx.compose.material:material-icons-extended:$libVersion"
+            const val iconsExtended =
+                "androidx.compose.material:material-icons-extended:$libVersion"
             const val material = "androidx.compose.material:material:$libVersion"
             const val runtime = "androidx.compose.runtime:runtime:$libVersion"
             const val test = "androidx.compose.ui:ui-test:$libVersion"

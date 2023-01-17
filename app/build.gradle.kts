@@ -56,7 +56,6 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.AndroidX.coreKtx)
 
-    implementation(Libs.Accompanist.insets)
     implementation(Libs.Accompanist.systemUiController)
 
     implementation(Libs.AndroidX.Activity.activityCompose)
